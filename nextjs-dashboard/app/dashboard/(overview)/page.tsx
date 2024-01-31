@@ -5,6 +5,12 @@ import LatestInvoices from "../../ui/dashboard/latest-invoices"
 import RevenueChart from "../../ui/dashboard/revenue-chart"
 import { CardsSkeleton, LatestInvoicesSkeleton, RevenueChartSkeleton } from "../../ui/skeletons"
 
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'Home',
+};
+
 export default async function Dashboard (){
     const {
         numberOfInvoices,
