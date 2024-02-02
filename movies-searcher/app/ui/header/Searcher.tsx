@@ -1,21 +1,25 @@
 'use client'
 
-import { useSearchParams, usePathname, useRouter } from "next/navigation"
+import { useSearchParams, useRouter } from "next/navigation"
+import { useDebouncedCallback } from "use-debounce"
+const WAIT_BETWEEN_CHANGE = 300
 
 export default function Searcher (){
     const searchParams = useSearchParams()
     const { replace } = useRouter()
 
-    const handleChange = (search: string) => {
+    const handleChange = useDebouncedCallback((search: string) => {
         const params = new URLSearchParams(searchParams)
         if(search){
             params.set('search', search)
+            params.set('page', '1')
         } else {
             params.delete('search')
         }
 
-        replace(`search?${params.toString()}`)
-    }
+        replace(`/search?${params.toString()}`)
+    }, WAIT_BETWEEN_CHANGE)
+
     return(
         <input 
             onChange={(event) => handleChange(event.target.value)}

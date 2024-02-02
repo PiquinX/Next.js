@@ -1,15 +1,22 @@
 import { type Movies, type FetchedMovies, type FetchedMovie, type Movie } from "./definitions"
 
-export async function searchMovies ({ search } : { search : string }): Promise<Movies | false> {
+type SearchMoviesReturn = {
+    movies: Movies
+    pages: number
+}
+
+export async function searchMovies ({ search, page } : { search : string, page: string }): Promise<SearchMoviesReturn | false> {
 
     try{
-        const res = await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=1c74998f&s=${search}`)
+        const res = await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=1c74998f&s=${search}&page=${page}`)
 
         const response = await res.json()
 
-        const movies: FetchedMovies = response.Search
+        const fetchedMovies: FetchedMovies = response.Search
 
-        const formatedMovies = movies.map((movie: FetchedMovie): Movie => ({
+        const pages = Math.round( (response.totalResults / 10) + 1 )
+
+        const movies = fetchedMovies.map((movie: FetchedMovie): Movie => ({
             title: movie.Title,
             year: movie.Year,
             id: movie.imdbID,
@@ -17,7 +24,7 @@ export async function searchMovies ({ search } : { search : string }): Promise<M
             type: movie.Type
         })) 
         
-        return formatedMovies
+        return { movies, pages }
 
     } catch (error){
         console.error(`Failed to search movies`)
@@ -41,6 +48,28 @@ export async function getMovies (): Promise<Movies | false> {
         })) 
 
         return formatedMovies
+
+    } catch (error){
+        console.error(`Failed to fetch movies`)
+
+        return false
+    }
+}
+
+export async function getMovie ({ id }: { id : string }): Promise<Movie | false> {
+    try{
+        const res = await fetch(`http://www.omdbapi.com/?apikey=1c74998f&i=${id}`)
+        const response = await res.json()
+
+        const formatedMovie = {
+            title: response.Title,
+            year: response.Year,
+            id: response.imdbID,
+            img: response.Poster,
+            type: response.Type
+        }
+
+        return formatedMovie
 
     } catch (error){
         console.error(`Failed to fetch movies`)

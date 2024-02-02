@@ -4,19 +4,20 @@ import MoviesSearchController from "../controllers/MoviesSearchController";
 import { redirect, useSearchParams } from "next/navigation"
 
 export default function Search (){
-  const searchParams = useSearchParams()
+    const searchParams = useSearchParams()
+    const params = new URLSearchParams(searchParams)
 
-    const { query } = {
-        query: searchParams.get('search')
+    const { query, page } = {
+        query: searchParams.get('search'),
+        page: searchParams.get('page')
     }
 
     if(!query) redirect('/')
+    if(!page) params.set('page', '1')
 
   return (
-      <>
-        <main className="grid grid-cols-responsive gap-10 px-20">  
+        <main>  
           <MoviesSearchController search={query} />
         </main>
-      </>
     );
 }

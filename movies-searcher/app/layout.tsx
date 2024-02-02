@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        <header className="w-full h-24 flex items-center justify-center">
+        <header className="w-full shadow-md mb-10 bg-white z-50 h-24 sticky top-0 border-b flex items-center justify-center">
           <Searcher />
         </header>
           {children}
