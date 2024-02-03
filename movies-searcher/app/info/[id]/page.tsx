@@ -1,6 +1,5 @@
 import { getMovie } from "@/app/lib/actions"
 import { notFound } from "next/navigation"
-import Movie from "@/app/ui/moviesList/Movie"
 
 export default async function Page ({ params }: { params : { id : string }}) {
     const id = params.id
@@ -9,7 +8,7 @@ export default async function Page ({ params }: { params : { id : string }}) {
     if(!movie) notFound()
 
     return(
-        <main className="flex flex-col items-center justify-center gap-14">
+        <div className="flex flex-col items-center justify-center gap-14">
             <h3 className="text-4xl" >{movie.title}</h3>
             <div className="flex flex-col items-center justify-center gap-5 w-[30%]">
                 <img
@@ -22,6 +21,6 @@ export default async function Page ({ params }: { params : { id : string }}) {
                     <p>{movie.year}</p>
                 </div>
             </div>
-        </main>
+        </div>
     )
 }

@@ -1,6 +1,7 @@
 import { useSearchParams } from "next/navigation"
 import { searchMovies } from "../lib/actions"
 import MoviesList from "../ui/MoviesList"
+import PageSelector from "../ui/moviesList/PageSelector"
 
 
 export default async function MoviesSearchController ({ search }: { search : string }){
@@ -13,10 +14,15 @@ export default async function MoviesSearchController ({ search }: { search : str
     const movies = await searchMovies({ search, page })
 
     if (movies){
-        return <MoviesList 
-            movies={movies.movies} 
-            maxPages={movies.pages} 
-            page={Number(page)} />
+        return (
+            <>
+                <MoviesList 
+                    movies={movies.movies} 
+                />
+
+                <PageSelector maxPages={movies.pages} />
+            </>
+            )
     } else {
         return <div>No Matching Results.</div>
     }

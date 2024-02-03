@@ -16,8 +16,8 @@ export default function Search (){
     if(!page) params.set('page', '1')
 
   return (
-        <main>  
+        <>  
           <MoviesSearchController search={query} />
-        </main>
+        </>
     );
 }
