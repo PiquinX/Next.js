@@ -1,20 +1,20 @@
-import { type Movie } from "@/app/lib/definitions";
-import Image from "next/image";
-import Link from "next/link";
+import { type Movie as MovieType } from '@/app/lib/definitions'
+import Link from 'next/link'
 
-export default async function Movie ({ title, img, type, year, id }: Movie){
-    return(
-        <Link 
+export const Movie: React.FC<MovieType> = ({ title, img, type, year, id }) => {
+  return (
+        <Link
             href={`/info/${id}`}
+            className="max-w-[500px]"
         >
-            <div className="flex group flex-col py-4 px-6 gap-5 border rounded-md">
+            <div className="flex flex-col py-4 px-6 gap-5 border rounded-md relative duration-100 hover:scale-105">
                 <h3 className="truncate hover:underline" >{title}</h3>
                 <img
-                    src={img} 
+                    src={img}
                     alt={`${title} poster`}
                     width={1000}
-                    height={760} 
-                    className='h-96 relative duration-100 group-hover:scale-105'
+                    height={760}
+                    className='h-96'
                 />
                 <div className="flex justify-between">
                     <p>{type}</p>
@@ -22,5 +22,7 @@ export default async function Movie ({ title, img, type, year, id }: Movie){
                 </div>
             </div>
         </Link>
-    )
+  )
 }
+
+export default Movie

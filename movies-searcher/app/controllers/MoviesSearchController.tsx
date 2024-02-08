@@ -1,29 +1,32 @@
-import { useSearchParams } from "next/navigation"
-import { searchMovies } from "../lib/actions"
-import MoviesList from "../ui/MoviesList"
-import PageSelector from "../ui/moviesList/PageSelector"
+import { searchMovies } from '../lib/actions'
+import MoviesList from '../ui/MoviesList'
+import PageSelector from '../ui/moviesList/PageSelector'
 
+interface Props {
+  search: string
+  page: string
+}
 
-export default async function MoviesSearchController ({ search }: { search : string }){
-    const searchParams = useSearchParams()
-    
-    const { page } = {
-        page: searchParams.get('page') || '1',
-    }
+const MoviesSearchController: React.FC<Props> = async ({ search, page }) => {
+  const movies = await searchMovies({ search, page })
 
-    const movies = await searchMovies({ search, page })
-
-    if (movies){
-        return (
+  console.log(typeof movies)
+  if (typeof movies === 'object') {
+    return (
             <>
-                <MoviesList 
-                    movies={movies.movies} 
+                <div>
+                    {`Results of search: "${search}": ${movies.totalResults}`}
+                </div>
+                <MoviesList
+                    movies={movies.movies}
                 />
 
                 <PageSelector maxPages={movies.pages} />
             </>
-            )
-    } else {
-        return <div>No Matching Results.</div>
-    }
+    )
+  } else {
+    return <div>No Matching Results.</div>
+  }
 }
+
+export default MoviesSearchController

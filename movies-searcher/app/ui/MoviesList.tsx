@@ -1,10 +1,12 @@
-import { type Movies } from "../lib/definitions";
-import Movie from'./moviesList/Movie'
+import { type Movies } from '../lib/definitions'
+import Movie from './moviesList/Movie'
 
-export default function MoviesList (
-    { movies }: { movies: Movies }
-){
-    return(
+interface Props {
+  movies: Movies
+}
+
+const MoviesList: React.FC<Props> = ({ movies }) => {
+  return (
             <div className="grid rounded-lg bg-white grid-cols-responsive gap-10 px-20 py-16">
                 {
                     movies.map(movie => (
@@ -12,5 +14,7 @@ export default function MoviesList (
                     ))
                 }
             </div>
-    )
+  )
 }
+
+export default MoviesList

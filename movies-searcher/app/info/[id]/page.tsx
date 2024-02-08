@@ -1,18 +1,22 @@
-import { getMovie } from "@/app/lib/actions"
-import { notFound } from "next/navigation"
+import { getMovie } from '@/app/lib/actions'
+import { notFound } from 'next/navigation'
 
-export default async function Page ({ params }: { params : { id : string }}) {
-    const id = params.id
-    const movie = await getMovie({ id: id })
+interface Props {
+  params: { id: string }
+}
 
-    if(!movie) notFound()
+const Page: React.FC<Props> = async ({ params }: { params: { id: string } }) => {
+  const id = params.id
+  const movie = await getMovie({ id })
 
-    return(
+  if (movie === false) notFound()
+
+  return (
         <div className="flex flex-col items-center justify-center gap-14">
             <h3 className="text-4xl" >{movie.title}</h3>
             <div className="flex flex-col items-center justify-center gap-5 w-[30%]">
                 <img
-                    src={movie.img} 
+                    src={movie.img}
                     alt={`${movie.title} poster`}
                     className='w-full'
                 />
@@ -22,5 +26,7 @@ export default async function Page ({ params }: { params : { id : string }}) {
                 </div>
             </div>
         </div>
-    )
+  )
 }
+
+export default Page

@@ -1,21 +1,20 @@
-import PageSelector from "../moviesList/PageSelector";
-import { type Movies } from "@/app/lib/definitions";
-import Movie from "../moviesList/Movie";
+import PageSelector from '../moviesList/PageSelector'
+import { type Movies } from '@/app/lib/definitions'
+import MoviesList from '../MoviesList'
 
-export default function MoviesListWithPages (
-    { movies, maxPages }: { movies: Movies, maxPages: number }
-){
-    return(
+interface Props {
+  movies: Movies
+  maxPages: number
+}
+
+const MoviesListWithPages: React.FC<Props> = ({ movies, maxPages }) => {
+  return (
         <>
-            <div className="grid grid-cols-responsive gap-10 px-20">
-                {
-                    movies.map(movie => (
-                        <Movie key={movie.id} { ...movie}/>
-                    ))
-                }
-            </div>
+            <MoviesList movies={movies} />
 
             <PageSelector maxPages={maxPages} />
         </>
-    )
+  )
 }
+
+export default MoviesListWithPages

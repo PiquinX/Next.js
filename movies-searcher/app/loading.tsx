@@ -1,3 +1,3 @@
-export default async function Loading (){
-    return <div className="text-6xl">Loading...</div>
+export default async function Loading (): Promise<JSX.Element> {
+  return <div className="text-6xl">Loading...</div>
 }

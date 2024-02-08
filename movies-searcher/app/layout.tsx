@@ -1,28 +1,26 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata } from 'next'
+import { inter } from './ui/fonts'
 import '@/app/globals.css'
-import Searcher from "./ui/header/Searcher";
-import { Footer } from "./ui/Footer";
-
-const inter = Inter({ subsets: ["latin"] });
+import Searcher from './ui/header/Searcher'
+import { Footer } from './ui/Footer'
 
 export const metadata: Metadata = {
-  title: "Movies Searcher",
-  description: "Discover new movies, series and games just by using this app.",
-};
+  title: 'Movies Searcher',
+  description: 'Discover new movies, series and games just by using this app.'
+}
 
-export default function RootLayout({
-  children,
+export default function RootLayout ({
+  children
 }: Readonly<{
-  children: React.ReactNode;
-}>) {
+  children: React.ReactNode
+}>): JSX.Element {
   return (
     <html lang="en">
       <head>
-        <script 
-          src="https://kit.fontawesome.com/e61d350a25.js" 
-          crossOrigin="anonymous" 
-          defer 
+        <script
+          src="https://kit.fontawesome.com/e61d350a25.js"
+          crossOrigin="anonymous"
+          defer
         />
 
       </head>
@@ -32,13 +30,13 @@ export default function RootLayout({
           <Searcher />
         </header>
 
-        <main className="px-16 py-10 bg-[#ededed] min-h-[70vh]"> 
+        <main className="px-16 py-10 bg-[#ededed] min-h-[70vh]">
           {children}
         </main>
 
         <Footer />
-        
+
       </body>
     </html>
-  );
+  )
 }
