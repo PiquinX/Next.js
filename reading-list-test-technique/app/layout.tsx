@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { gloriaHallelujah } from './ui/fonts'
 import './globals.css'
-import { type ReactElement } from 'react'
 import { ReadingListProvider } from './contexts/ReadingListContext'
 
 export const metadata: Metadata = {
@@ -13,7 +12,7 @@ export default function RootLayout ({
   children
 }: Readonly<{
   children: React.ReactNode
-}>): ReactElement {
+}>): JSX.Element {
   return (
     <html lang="en">
       <body className={`${gloriaHallelujah.className} text-white`}>

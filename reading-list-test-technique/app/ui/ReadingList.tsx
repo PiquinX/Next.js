@@ -1,6 +1,7 @@
 'use client'
 
 import { useReadingList } from '../hooks/useReadingList'
+import { DATA_TRANSFER_KEY } from '../lib/consts'
 import { type BookType } from '../lib/definitions'
 
 const ReadingList = (): JSX.Element => {
@@ -8,7 +9,10 @@ const ReadingList = (): JSX.Element => {
   // const isBookDragging = useRef<boolean>(false)
 
   const handleDrop = (event: React.DragEvent): void => {
-    const book: BookType = JSON.parse(event.dataTransfer.getData('widgetType'))
+    const newData = event.dataTransfer.getData(DATA_TRANSFER_KEY)
+    if (newData.split(',').length <= 4) return
+
+    const book: BookType = JSON.parse(newData)
     addBookToReadingList(book)
   }
 
@@ -17,7 +21,7 @@ const ReadingList = (): JSX.Element => {
   }
 
   const handleOnDrag = (event: React.DragEvent, widgetType: BookType): void => {
-    event.dataTransfer.setData('widgetType', JSON.stringify(widgetType))
+    event.dataTransfer.setData(DATA_TRANSFER_KEY, JSON.stringify(widgetType))
   }
 
   return (
@@ -29,10 +33,14 @@ const ReadingList = (): JSX.Element => {
           <h3
             draggable={false}
             className='text-4xl'>Reading List</h3>
-          <div className='flex flex-col gap-5'>
+          <div
+            className='flex flex-col gap-5'
+            data-testid='reading-list'
+          >
             {
                 readingList.map(book => (
                     <div
+                      data-testid={`reading-${book.ISBN}`}
                       draggable
                       onDragStart={(event) => { handleOnDrag(event, book) }}
                       key={book.ISBN}

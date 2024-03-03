@@ -15,4 +15,15 @@
 
 7 - Despliegue: La aplicación debe estar desplegada en algún servicio de hosting gratuito (Netlify, Vercel, Firebase, etc) y debe ser accesible a través de una URL pública. Indica la URL en el README.
 
-8 - Test: La aplicación debe tener AL MENOS un test. Haz el test que consideres más importante para tu aplicación.
+8 - Test: La aplicación debe tener AL MENOS un test. Haz el test que consideres más importante para tu aplicación. ✔️
+
+
+
+Questions:
+1 - Where should I put the handleDrop/handleDragOver/handleOnDrag functions? (ListOfBooks/ReadingList/Books)
+2 - Should I use React.FC<Props> to type components or should I type them as a normal function?
+3 - How should I type a Context with handling functions in TS, and how to can I make a Reducer for it? (ReadingListContext)
+4 - How should I declare a initialState for the context in TS? becuase its throwing me an error in the "localStorage.getItem('reading-list')", although it's working. (ReadingListContext)
+5 - Are the filter made with good practices? if not, where and how should I make them? because in the ShoppingCart app I made a Context for the filter.
+6 - How should I improve the code to take the most advantage possible of Next.JS?
+7 - I'm using TS correctly?

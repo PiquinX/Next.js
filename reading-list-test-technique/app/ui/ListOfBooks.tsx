@@ -7,6 +7,7 @@ import BooksAvailability from './ListOfBooks/BooksAvailability'
 import { filterBooks } from '../lib/utils'
 import BooksFilter from './ListOfBooks/BooksFilter'
 import { useFilters } from '../hooks/useFilters'
+import { DATA_TRANSFER_KEY } from '../lib/consts'
 
 interface Props {
   books: ListOfBooksType
@@ -17,7 +18,10 @@ const ListOfBooks: React.FC<Props> = ({ books }) => {
   const { filters, changeGenre } = useFilters()
 
   const handleDrop = (event: React.DragEvent): void => {
-    const book: BookType = JSON.parse(event.dataTransfer.getData('widgetType'))
+    const newData = event.dataTransfer.getData(DATA_TRANSFER_KEY)
+    if (newData.split(',').length <= 4) return
+
+    const book: BookType = JSON.parse(newData)
     removeBookFromReadingList(book)
   }
 
@@ -32,7 +36,7 @@ const ListOfBooks: React.FC<Props> = ({ books }) => {
       <BooksAvailability availableBooks={availableBooks.length} readingList={readingList.length} />
       <BooksFilter changeGenre={changeGenre} />
       <div
-        data-testid='books-list'
+        data-testid='list-of-books'
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         className='grid w-full grid-cols-responsiveCols gap-10 min-h-[60vh]'>

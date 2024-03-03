@@ -1,5 +1,6 @@
 'use client'
 
+import { SEARCH_PARAMS } from '@/app/lib/constants'
 import { useSearchParams, useRouter } from 'next/navigation'
 
 interface Props {
@@ -11,12 +12,12 @@ const PageSelector: React.FC<Props> = ({ maxPages }) => {
   const { replace } = useRouter()
 
   const { page } = {
-    page: Number(searchParams.get('page')) ?? 1
+    page: Number(searchParams.get(SEARCH_PARAMS.PAGE)) ?? 1
   }
 
   const handleChangePage = (newPage: number): void => {
     const params = new URLSearchParams(searchParams)
-    params.set('page', newPage.toString())
+    params.set(SEARCH_PARAMS.PAGE, newPage.toString())
 
     replace(`/search?${params.toString()}`)
   }

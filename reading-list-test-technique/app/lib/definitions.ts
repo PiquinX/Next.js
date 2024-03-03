@@ -1,3 +1,5 @@
+import { type GENRE_FILTERS } from './consts'
+
 interface Author {
   'name': string
   'otherBooks': string[]
@@ -40,7 +42,7 @@ export interface ReadingListContextType {
   removeBookFromReadingList: (bookToRemove: BookType) => void
 }
 
-export type GenreFilterType = 'Default' | 'Fantasía' | 'Ciencia ficción' | 'Zombies' | 'Terror' | string
+export type GenreFilterType = typeof GENRE_FILTERS[keyof typeof GENRE_FILTERS]
 
 export interface FiltersType {
   genre: GenreFilterType

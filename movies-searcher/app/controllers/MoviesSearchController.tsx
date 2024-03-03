@@ -10,11 +10,10 @@ interface Props {
 const MoviesSearchController: React.FC<Props> = async ({ search, page }) => {
   const movies = await searchMovies({ search, page })
 
-  console.log(typeof movies)
   if (typeof movies === 'object') {
     return (
             <>
-                <div>
+                <div className='w-max mb-2 text-md'>
                     {`Results of search: "${search}": ${movies.totalResults}`}
                 </div>
                 <MoviesList

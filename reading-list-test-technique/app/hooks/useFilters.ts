@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { type FiltersType } from '../lib/definitions'
+import { type GenreFilterType, type FiltersType } from '../lib/definitions'
 // import { type GenreFilterType } from '../lib/definitions'
 
 interface ReturnType {
   filters: FiltersType
-  changeGenre: (newGenre: string) => void
+  changeGenre: (newGenre: GenreFilterType) => void
 }
 
 export const useFilters = (): ReturnType => {
@@ -12,7 +12,7 @@ export const useFilters = (): ReturnType => {
     genre: 'Default'
   })
 
-  const changeGenre = (newGenre: string): void => {
+  const changeGenre = (newGenre: GenreFilterType): void => {
     const newFilters = structuredClone(filters)
 
     newFilters.genre = newGenre

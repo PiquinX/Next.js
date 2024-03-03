@@ -1,11 +1,11 @@
 'use client'
 
 import { createContext, useEffect, useState } from 'react'
-import { type ReadingListType, type BookType } from '../lib/definitions'
+import { type ReadingListType, type BookType, type ReadingListContextType } from '../lib/definitions'
 
 const initialReadingList: ReadingListType = JSON.parse(localStorage.getItem('reading-list')) ?? []
 
-const initialValue = {
+const initialValue: ReadingListContextType = {
   readingList: initialReadingList,
   addBookToReadingList: (newBook: BookType) => {},
   removeBookFromReadingList: (bookToRemove: BookType) => {}
