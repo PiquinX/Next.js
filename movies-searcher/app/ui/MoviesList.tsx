@@ -7,7 +7,9 @@ interface Props {
 
 const MoviesList: React.FC<Props> = ({ movies }) => {
   return (
-            <div className="grid rounded-lg bg-white grid-cols-responsive gap-10 px-20 py-16">
+            <div
+              data-testid='movies-list'
+              className="grid rounded-lg bg-white grid-cols-responsive gap-10 px-20 py-16">
                 {
                     movies.map(movie => (
                         <Movie key={movie.id} { ...movie}/>

@@ -1,6 +1,5 @@
 import { searchMovies } from '../lib/actions'
-import MoviesList from '../ui/MoviesList'
-import PageSelector from '../ui/moviesList/PageSelector'
+import MoviesListWithPages from '../ui/search/MoviesListWithPages'
 
 interface Props {
   search: string
@@ -12,16 +11,12 @@ const MoviesSearchController: React.FC<Props> = async ({ search, page }) => {
 
   if (typeof movies === 'object') {
     return (
-            <>
-                <div className='w-max mb-2 text-md'>
-                    {`Results of search: "${search}": ${movies.totalResults}`}
-                </div>
-                <MoviesList
-                    movies={movies.movies}
-                />
-
-                <PageSelector maxPages={movies.pages} />
-            </>
+              <MoviesListWithPages
+                search={search}
+                movies={movies.movies}
+                totalResults={movies.totalResults}
+                maxPages={movies.pages}
+              />
     )
   } else {
     return <div>No Matching Results.</div>

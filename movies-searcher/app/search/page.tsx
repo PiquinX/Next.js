@@ -4,7 +4,7 @@ import MoviesSearchController from '../controllers/MoviesSearchController'
 import { redirect, useSearchParams } from 'next/navigation'
 import { SEARCH_PARAMS } from '../lib/constants'
 
-export default function Search (): JSX.Element {
+export default function Page (): JSX.Element {
   const searchParams = useSearchParams()
   const params = new URLSearchParams(searchParams)
 
