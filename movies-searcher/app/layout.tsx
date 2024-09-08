@@ -3,6 +3,7 @@ import { inter } from './ui/fonts'
 import '@/app/globals.css'
 import Searcher from './ui/header/Searcher'
 import { Footer } from './ui/Footer'
+// import ToggleSideBar from './ui/ToggleSideBar'
 
 export const metadata: Metadata = {
   title: 'Movies Searcher',
@@ -27,6 +28,7 @@ export default function RootLayout ({
       <body className={`${inter.className}`}>
 
         <header className="w-full shadow-md bg-white z-50 h-24 sticky top-0 border-b flex items-center justify-center">
+          {/* <ToggleSideBar /> */}
           <Searcher />
         </header>
 
